@@ -18,4 +18,12 @@ extension Date {
         }
         return timeDate
     }
+    
+    /// 轉換成小時資料
+    func formateToHour() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH"
+        let hourString = formatter.string(from: self) + "時"
+        return hourString
+    }
 }

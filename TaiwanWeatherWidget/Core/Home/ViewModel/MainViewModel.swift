@@ -14,8 +14,8 @@ class MainViewModel: ObservableObject {
     @Published var authorizationCode: String = ""
     @Published var isShowSuccessSaveAuthorizationCode: Bool = false
     
-    @Published var selectedCity: String = "新北市"
-    @Published var selectedTown: String = "樹林區"
+    @Published var selectedCity: String = "-"
+    @Published var selectedTown: String = "-"
     @Published var selectedElementNameShow: String = "-"
     @Published var selectedElementNames: [String] = ["體感溫度", "溫度", "降雨機率"]
     @Published var selectedElementNamesTmp: [String] = []
@@ -119,6 +119,28 @@ class MainViewModel: ObservableObject {
         }
     }
     
+    /// 獲取下雨機率，由於下雨機率是6小時為單位所以需要叉分
+    func getRainRate(targetTime: Date) -> Int {
+        let idx = rainRate.firstIndex { $0.1 == targetTime }
+        if idx != nil {
+            return rainRate[idx!].0
+        }
+        guard let futureTime = Calendar.current.date(byAdding: .hour, value: 3, to: targetTime) else {
+            return 0
+        }
+        guard let pastTime = Calendar.current.date(byAdding: .hour, value: -3, to: targetTime) else {
+            return 0
+        }
+        let idx1 = rainRate.firstIndex { $0.1 == futureTime }
+        let idx2 = rainRate.firstIndex { $0.1 == pastTime }
+        guard idx1 != nil || idx2 != nil else { return 0 }
+        var tmp = 0
+        if idx1 != nil { tmp += rainRate[idx1!].0 }
+        if idx2 != nil { tmp += rainRate[idx2!].0 }
+        tmp = tmp / ((idx1 != nil ? 1 : 0) + (idx2 != nil ? 1 : 0))
+        return tmp
+    }
+    
     // Private Function
     /// 處理過程發生錯誤
     private func processErrorHandler(errorStatus: any RawRepresentable<String>, customErrorMessage: String = "") async {
@@ -138,6 +160,10 @@ class MainViewModel: ObservableObject {
     private func searchSelectedPlaceWeather() async {
         await MainActor.run {
             SharedInfoManager.shared.isProcessing.toggle()
+            temperature.removeAll()
+            bodyTemperature.removeAll()
+            rainRate.removeAll()
+            timeLine.removeAll()
         }
         if SharedInfoManager.shared.exclusiveAuthorizationCode == "" {
             // 若使用公用授權碼將受限於請求次數，優先使用本地資料
@@ -239,6 +265,10 @@ class MainViewModel: ObservableObject {
             timeLine = atTimeLine
             if tTimeLine.count > timeLine.count { timeLine = tTimeLine }
             if popTimeLine.count > timeLine.count { timeLine = popTimeLine }
+            timeLine.sort()
+            bodyTemperature.sort { $0.1 < $1.1 }
+            temperature.sort { $0.1 < $1.1 }
+            rainRate.sort { $0.1 < $1.1 }
         }
         return true
     }

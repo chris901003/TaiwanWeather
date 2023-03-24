@@ -23,33 +23,7 @@ struct HomeView: View {
             VStack {
                 authorizationSection
                 selectedSection
-                
-                VStack {
-                    // isValidSelect
-                    if vm.isLoadingWeatherInfo {
-                        VStack {
-                            ProgressView()
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: 250)
-                        .background(.ultraThinMaterial)
-                        .cornerRadius(10)
-                    } else {
-                        VStack {
-                            HStack {
-                                Text(vm.selectedCity)
-                                Text(vm.selectedTown)
-                                    .underline()
-                            }
-                            .font(.title3)
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: 250)
-                        .background(
-                            RoundedRectangle(cornerRadius: 20)
-                                .foregroundColor(Color.white)
-                        )
-                    }
-                }
-                .padding()
+                weatherInfoSection
                 
                 Spacer()
             }
@@ -149,21 +123,21 @@ struct HomeView: View {
                         }
                     }
             }
-            HStack {
-                Text("選擇資訊內容:")
-                Text(vm.selectedElementNameShow)
-                    .lineLimit(1)
-                    .frame(width: 150)
-                    .padding(8)
-                    .background(.ultraThinMaterial)
-                    .cornerRadius(10)
-                    .onTapGesture {
-                        vm.selectedElementNamesTmp = vm.selectedElementNames
-                        withAnimation {
-                            isShowElementNameSection.toggle()
-                        }
-                    }
-            }
+//            HStack {
+//                Text("選擇資訊內容:")
+//                Text(vm.selectedElementNameShow)
+//                    .lineLimit(1)
+//                    .frame(width: 150)
+//                    .padding(8)
+//                    .background(.ultraThinMaterial)
+//                    .cornerRadius(10)
+//                    .onTapGesture {
+//                        vm.selectedElementNamesTmp = vm.selectedElementNames
+//                        withAnimation {
+//                            isShowElementNameSection.toggle()
+//                        }
+//                    }
+//            }
         }
         .font(.headline)
         .minimumScaleFactor(0.8)
@@ -323,5 +297,78 @@ struct HomeView: View {
         .background(Color.white)
         .cornerRadius(20)
         .shadow(radius: 5)
+    }
+    
+    private var weatherInfoSection: some View {
+        VStack {
+            if vm.isValidSelect {
+                if vm.isLoadingWeatherInfo {
+                    weatherInfoLoadSection
+                } else {
+                    weatherDetailInfoSection
+                }
+            }
+        }
+        .padding()
+    }
+    
+    private var weatherInfoLoadSection: some View {
+        VStack {
+            ProgressView()
+        }
+        .frame(maxWidth: .infinity, maxHeight: 250)
+        .background(.ultraThinMaterial)
+        .cornerRadius(10)
+    }
+    
+    private var weatherDetailInfoSection: some View {
+        VStack {
+            Text(vm.selectedTown)
+                .font(Font.custom("ChalkboardSE-Bold", size: 20))
+                .bold()
+                .padding(.horizontal)
+                .padding(.top, 8)
+            Text("\(vm.temperature.first?.0 ?? 0)° C")
+                .font(Font.custom("ChalkboardSE-Bold", size: 50))
+                .foregroundColor(Color.getTemperatureColor(temperature: vm.temperature.first?.0 ?? 0))
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 16) {
+                    VStack(spacing: 8) {
+                        Image(systemName: "clock")
+                        Image(systemName: "thermometer.medium")
+                        Image(systemName: "medical.thermometer")
+                        Image(systemName: "cloud.rain")
+                        Spacer()
+                    }
+                    ForEach(vm.timeLine.indices, id: \.self) { idx in
+                        VStack(spacing: 8) {
+                            Text(vm.timeLine[idx].formateToHour())
+                            Text("\(vm.temperature[idx].0)°")
+                                .foregroundColor(Color.getTemperatureColor(temperature: vm.temperature[idx].0))
+                            Text("\(vm.bodyTemperature[idx].0)°")
+                                .foregroundColor(Color.getTemperatureColor(temperature: vm.temperature[idx].0))
+                            Text("\(vm.getRainRate(targetTime: vm.timeLine[idx]))%")
+                                .foregroundColor(Color.getRainRateColor(rainRate: vm.getRainRate(targetTime: vm.timeLine[idx])))
+                            Spacer()
+                        }
+                    }
+                }
+            }
+            .bold()
+            .padding(8)
+            .padding(.bottom, -12)
+            .background(Color.white.cornerRadius(10))
+            .padding(.top, -32)
+            .padding(.horizontal)
+            Text("資料來自中央氣象局")
+                .foregroundColor(Color.secondary)
+                .font(.subheadline)
+                .fontWeight(.semibold)
+            Spacer()
+        }
+        .frame(maxWidth: .infinity, maxHeight: 280)
+        .background(.regularMaterial)
+        .cornerRadius(10)
     }
 }
