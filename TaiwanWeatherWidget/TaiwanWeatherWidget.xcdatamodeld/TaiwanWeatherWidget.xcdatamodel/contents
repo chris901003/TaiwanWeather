@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="21G115" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ATEntity" representedClassName="ATEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="temperature" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="updateTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="town" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TownEntity" inverseName="at" inverseEntity="TownEntity"/>
+    </entity>
+    <entity name="CityEntity" representedClassName="CityEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="town" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TownEntity" inverseName="city" inverseEntity="TownEntity"/>
+    </entity>
+    <entity name="PoPEntity" representedClassName="PoPEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="probability" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="updateTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="town" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TownEntity" inverseName="pop" inverseEntity="TownEntity"/>
+    </entity>
+    <entity name="TEntity" representedClassName="TEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="temperature" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="updateTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="town" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TownEntity" inverseName="t" inverseEntity="TownEntity"/>
+    </entity>
+    <entity name="TownEntity" representedClassName="TownEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="updateTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="at" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ATEntity" inverseName="town" inverseEntity="ATEntity"/>
+        <relationship name="city" optional="YES" maxCount="1" deletionRule="Deny" destinationEntity="CityEntity" inverseName="town" inverseEntity="CityEntity"/>
+        <relationship name="pop" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PoPEntity" inverseName="town" inverseEntity="PoPEntity"/>
+        <relationship name="t" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TEntity" inverseName="town" inverseEntity="TEntity"/>
+    </entity>
+    <entity name="UserInfoEntity" representedClassName="UserInfoEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="authorizationCode" optional="YES" attributeType="String"/>
+        <attribute name="queryCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="queryCountUpdateTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+</model>
