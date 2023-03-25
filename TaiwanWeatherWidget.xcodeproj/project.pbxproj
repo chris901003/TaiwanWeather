@@ -15,6 +15,10 @@
 		053EA4FD29C72E9200BF19E1 /* WeatherApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053EA4FB29C72E9200BF19E1 /* WeatherApiManager.swift */; };
 		054D3E4829CC96C700E1CAC0 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D3E4729CC96C700E1CAC0 /* DateExtension.swift */; };
 		054D3E4A29CDC29900E1CAC0 /* ColorExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D3E4929CDC29900E1CAC0 /* ColorExtenstion.swift */; };
+		054D3E4C29CDEB4C00E1CAC0 /* ProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D3E4B29CDEB4C00E1CAC0 /* ProviderManager.swift */; };
+		054D3E4D29CDEB7400E1CAC0 /* ProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D3E4B29CDEB4C00E1CAC0 /* ProviderManager.swift */; };
+		054D3E4E29CDF1C200E1CAC0 /* DataCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E281AE29CB2DD300BBC58F /* DataCodeModel.swift */; };
+		054D3E4F29CDF1CE00E1CAC0 /* WeatherInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A83FFF29CBEE2500327C60 /* WeatherInfoModel.swift */; };
 		05A8400029CBEE2500327C60 /* WeatherInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A83FFF29CBEE2500327C60 /* WeatherInfoModel.swift */; };
 		05C62C6A29C6EB59007CFE8F /* TaiwanWeatherWidgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C62C6929C6EB59007CFE8F /* TaiwanWeatherWidgetApp.swift */; };
 		05C62C6E29C6EB5B007CFE8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05C62C6D29C6EB5B007CFE8F /* Assets.xcassets */; };
@@ -66,6 +70,7 @@
 		053EA4FB29C72E9200BF19E1 /* WeatherApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApiManager.swift; sourceTree = "<group>"; };
 		054D3E4729CC96C700E1CAC0 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		054D3E4929CDC29900E1CAC0 /* ColorExtenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtenstion.swift; sourceTree = "<group>"; };
+		054D3E4B29CDEB4C00E1CAC0 /* ProviderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderManager.swift; sourceTree = "<group>"; };
 		05A83FFF29CBEE2500327C60 /* WeatherInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfoModel.swift; sourceTree = "<group>"; };
 		05C62C6629C6EB59007CFE8F /* TaiwanWeatherWidget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaiwanWeatherWidget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C62C6929C6EB59007CFE8F /* TaiwanWeatherWidgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaiwanWeatherWidgetApp.swift; sourceTree = "<group>"; };
@@ -224,6 +229,7 @@
 			children = (
 				05C62C8E29C70400007CFE8F /* TaiwanWeatherWidgetExtensionBundle.swift */,
 				05C62C9029C70400007CFE8F /* TaiwanWeatherWidgetExtension.swift */,
+				054D3E4B29CDEB4C00E1CAC0 /* ProviderManager.swift */,
 				05C62C9229C70400007CFE8F /* Assets.xcassets */,
 				05C62C9429C70400007CFE8F /* Info.plist */,
 			);
@@ -372,6 +378,7 @@
 				05C62C7B29C6EBF5007CFE8F /* HomeView.swift in Sources */,
 				05C62C6A29C6EB59007CFE8F /* TaiwanWeatherWidgetApp.swift in Sources */,
 				05A8400029CBEE2500327C60 /* WeatherInfoModel.swift in Sources */,
+				054D3E4C29CDEB4C00E1CAC0 /* ProviderManager.swift in Sources */,
 				05F833CB29CB1CB5007F6394 /* SharedInfoManager.swift in Sources */,
 				05F833D329CB20CC007F6394 /* TransparentBackground.swift in Sources */,
 				053EA4F529C71C1900BF19E1 /* CoreDataManager.swift in Sources */,
@@ -388,10 +395,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				054D3E4F29CDF1CE00E1CAC0 /* WeatherInfoModel.swift in Sources */,
 				053EA4FA29C723A400BF19E1 /* TaiwanWeatherWidget.xcdatamodeld in Sources */,
 				053EA4F629C71C1900BF19E1 /* CoreDataManager.swift in Sources */,
 				05F833CC29CB1FA9007F6394 /* SharedInfoManager.swift in Sources */,
 				053EA4FD29C72E9200BF19E1 /* WeatherApiManager.swift in Sources */,
+				054D3E4E29CDF1C200E1CAC0 /* DataCodeModel.swift in Sources */,
+				054D3E4D29CDEB7400E1CAC0 /* ProviderManager.swift in Sources */,
 				05C62C9129C70400007CFE8F /* TaiwanWeatherWidgetExtension.swift in Sources */,
 				05C62C8F29C70400007CFE8F /* TaiwanWeatherWidgetExtensionBundle.swift in Sources */,
 			);

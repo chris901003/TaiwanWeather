@@ -46,14 +46,30 @@ class CoreDataManager {
     }
     
     /// 獲取城市資料
-    func fetchTownEntity(cityName: String) -> TownEntity? {
+    func fetchCityEntity(cityName: String) -> CityEntity? {
+        let cityFetchRequest = NSFetchRequest<CityEntity>(entityName: "CityEntity")
+        let filter = NSPredicate(format: "name == %@", cityName)
+        cityFetchRequest.predicate = filter
+        let cityEntitySearchResult = try? container.viewContext.fetch(cityFetchRequest)
+        return cityEntitySearchResult?.first
+    }
+    
+    /// 獲取鄉鎮資料
+    func fetchTownEntity(townName: String) -> [TownEntity]? {
         let townFetchRequest = NSFetchRequest<TownEntity>(entityName: "TownEntity")
-        let filter: NSPredicate = NSPredicate(format: "name == %@", cityName)
+        let filter = NSPredicate(format: "name == %@", townName)
         townFetchRequest.predicate = filter
-        guard let townInfoSearchResult = try? container.viewContext.fetch(townFetchRequest) else {
-            return nil
-        }
-        return townInfoSearchResult.first
+        let townEntitiesSearchResult = try? container.viewContext.fetch(townFetchRequest)
+        return townEntitiesSearchResult
+    }
+    
+    /// 提供城市名稱下獲取鄉鎮資料
+    func fetchTownEntity(cityName: String, townName: String) -> TownEntity? {
+        let townFetchRequest = NSFetchRequest<TownEntity>(entityName: "TownEntity")
+        let filter = NSPredicate(format: "name == %@ && city.name == %@", townName, cityName)
+        townFetchRequest.predicate = filter
+        let townEntitySearchResult = try? container.viewContext.fetch(townFetchRequest)
+        return townEntitySearchResult?.first
     }
     
     /// 保存資料
@@ -71,5 +87,42 @@ class CoreDataManager {
             container.viewContext.delete(entity)
         }
         saveCoreData()
+    }
+}
+
+extension CoreDataManager {
+    /// 獲取所有城市
+    func fetchCityEntity() -> [CityEntity]? {
+        let cityFetchRequest = NSFetchRequest<CityEntity>(entityName: "CityEntity")
+        let cityEntitiesSearchResult = try? container.viewContext.fetch(cityFetchRequest)
+        return cityEntitiesSearchResult
+    }
+    
+    /// 獲取所有鄉鎮資料
+    func fetchTownEntity() -> [TownEntity]? {
+        let townFetchRequest = NSFetchRequest<TownEntity>(entityName: "TownEntity")
+        let townEntitiesSearchResult = try? container.viewContext.fetch(townFetchRequest)
+        return townEntitiesSearchResult
+    }
+    
+    /// 獲取所有溫度
+    func fetchTEntity() -> [TEntity]? {
+        let tFetchRequest = NSFetchRequest<TEntity>(entityName: "TEntity")
+        let tEntitiesSearchResult = try? container.viewContext.fetch(tFetchRequest)
+        return tEntitiesSearchResult
+    }
+    
+    /// 獲取所有體感溫度
+    func fetchATEntity() -> [ATEntity]? {
+        let atFetchRequest = NSFetchRequest<ATEntity>(entityName: "ATEntity")
+        let atEntitiesSearchResult = try? container.viewContext.fetch(atFetchRequest)
+        return atEntitiesSearchResult
+    }
+    
+    /// 獲取所有降雨機率
+    func fetchPoPEntity() -> [PoPEntity]? {
+        let popFetchRequest = NSFetchRequest<PoPEntity>(entityName: "PoPEntity")
+        let popEntitiesSearchResult = try? container.viewContext.fetch(popFetchRequest)
+        return popEntitiesSearchResult
     }
 }

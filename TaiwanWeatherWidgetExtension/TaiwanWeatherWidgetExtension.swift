@@ -9,33 +9,43 @@ import WidgetKit
 import SwiftUI
 
 struct Provider: TimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date())
+    
+//    private var manager: ProviderManager = ProviderManager()
+    
+    func placeholder(in context: Context) -> WeatherInfoEntry {
+        WeatherInfoEntry(date: Date())
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date())
-        completion(entry)
+    func getSnapshot(in context: Context, completion: @escaping (WeatherInfoEntry) -> ()) {
+        Task {
+            var entry = WeatherInfoEntry(date: Date())
+            entry.info = await ProviderManager.getInfo()
+            completion(entry)
+        }
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate)
-            entries.append(entry)
+        Task {
+            let currentDate = Date()
+            let entryDate = Calendar.current.date(byAdding: .hour, value: 1, to: currentDate)!
+            var entry = WeatherInfoEntry(date: entryDate)
+            entry.info = await ProviderManager.getInfo()
+            let timeline = Timeline(entries: [entry], policy: .atEnd)
+            completion(timeline)
         }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
     }
 }
 
-struct SimpleEntry: TimelineEntry {
+struct WeatherInfoEntry: TimelineEntry {
     let date: Date
+    var temperature: [(Int, Date)] = []
+    var rainRate: [(Int, Date)] = []
+    var bodyTemperature: [(Int, Date)] = []
+    var timeLine: [Date] = []
+    
+    var info: String = ""
 }
 
 struct TaiwanWeatherWidgetExtensionEntryView : View {
@@ -43,8 +53,7 @@ struct TaiwanWeatherWidgetExtensionEntryView : View {
     let t = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.hungyen.TaiwanWeatherWidget")?.appending(path: "Weather")
 
     var body: some View {
-        Text(t!.path)
-//        Text(entry.date, style: .time)
+        Text(entry.info)
     }
 }
 
@@ -55,14 +64,8 @@ struct TaiwanWeatherWidgetExtension: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             TaiwanWeatherWidgetExtensionEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
-    }
-}
-
-struct TaiwanWeatherWidgetExtension_Previews: PreviewProvider {
-    static var previews: some View {
-        TaiwanWeatherWidgetExtensionEntryView(entry: SimpleEntry(date: Date()))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        .configurationDisplayName("天氣")
+        .description("獲取當地天氣")
+        .supportedFamilies([.systemMedium])
     }
 }

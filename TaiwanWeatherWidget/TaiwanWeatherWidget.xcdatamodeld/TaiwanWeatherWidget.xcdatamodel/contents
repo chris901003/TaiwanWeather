@@ -35,5 +35,7 @@
         <attribute name="authorizationCode" optional="YES" attributeType="String"/>
         <attribute name="queryCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="queryCountUpdateTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="selectedCity" optional="YES" attributeType="String"/>
+        <attribute name="selectedTown" optional="YES" attributeType="String"/>
     </entity>
 </model>

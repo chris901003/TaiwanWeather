@@ -27,12 +27,10 @@ class MainViewModel: ObservableObject {
     @Published var bodyTemperature: [(Int, Date)] = []
     @Published var timeLine: [Date] = []
     
-    // Public Variable
-    var weatherInfo: WeatherInfoModel? = nil
-    
     // Private Variable
     private var userInfoEntity: UserInfoEntity
     private var selectedAnyCancellable: AnyCancellable? = nil
+    private var weatherInfo: WeatherInfoModel? = nil
     private var maximumWeatherQueryTime: Int = 100
     private var updateTimeSpace: Int = 10 // (30 * 60)
     
@@ -40,6 +38,8 @@ class MainViewModel: ObservableObject {
     init() {
         if let userInfoEntity = CoreDataManager.shared.fetchUserInfo() {
             self.userInfoEntity = userInfoEntity
+            selectedCity = userInfoEntity.selectedCity!
+            selectedTown = userInfoEntity.selectedTown!
             let lastQueryCountUpdateTime = userInfoEntity.queryCountUpdateTime ?? Date()
             let updateDay = Calendar.current.component(.day, from: lastQueryCountUpdateTime)
             let nowDay = Calendar.current.component(.day, from: Date())
@@ -53,6 +53,8 @@ class MainViewModel: ObservableObject {
             newUserInfoEntity.queryCountUpdateTime = Date()
             newUserInfoEntity.queryCount = 0
             newUserInfoEntity.authorizationCode = ""
+            newUserInfoEntity.selectedCity = "-"
+            newUserInfoEntity.selectedTown = "-"
             CoreDataManager.shared.saveCoreData()
             self.userInfoEntity = newUserInfoEntity
         }
@@ -82,8 +84,10 @@ class MainViewModel: ObservableObject {
                 SharedInfoManager.shared.exclusiveAuthorizationCode = authorizationCode
             }
         }
-        userInfoEntity.authorizationCode = authorizationCode
-        CoreDataManager.shared.saveCoreData()
+        await MainActor.run {
+            userInfoEntity.authorizationCode = authorizationCode
+            CoreDataManager.shared.saveCoreData()
+        }
         await MainActor.run {
             isShowSuccessSaveAuthorizationCode.toggle()
         }
@@ -169,11 +173,13 @@ class MainViewModel: ObservableObject {
             // 若使用公用授權碼將受限於請求次數，優先使用本地資料
             let loadResult = await loadWeatherInfoFromCoreData()
             if loadResult {
+//                print("✅ Load weather info from core data.")
                 await MainActor.run {
                     SharedInfoManager.shared.isProcessing.toggle()
                 }
                 return
             } else {
+//                print("❌ Reget weather info from web")
                 await MainActor.run {
                     temperature.removeAll()
                     bodyTemperature.removeAll()
@@ -206,15 +212,20 @@ class MainViewModel: ObservableObject {
         }
         
         // 將資料保存到本地設備當中
-        await saveWeatherInfoIntoCoreData(cityName: selectedCity, townName: selectedTown, elementNames: selectedElementNames)
+        await MainActor.run {
+            saveWeatherInfoIntoCoreData()
+        }
         // 調用從CoreData中獲取天氣資料
         guard await loadWeatherInfoFromCoreData() else {
             await processErrorHandler(errorStatus: SearchWeatherInfoError.loadWeatherInfoFromCoreDataError)
             return
         }
         
-        if SharedInfoManager.shared.exclusiveAuthorizationCode == "" {
-            userInfoEntity.queryCount += 1
+        await MainActor.run {
+            if SharedInfoManager.shared.exclusiveAuthorizationCode == "" {
+                userInfoEntity.queryCount += 1
+                CoreDataManager.shared.saveCoreData()
+            }
         }
         await MainActor.run {
             SharedInfoManager.shared.isProcessing.toggle()
@@ -223,8 +234,10 @@ class MainViewModel: ObservableObject {
     
     /// 從CoreData獲取氣象資料
     private func loadWeatherInfoFromCoreData() async -> Bool {
-        let townEntity = CoreDataManager.shared.fetchTownEntity(cityName: selectedCity)
-        guard let townEntity = townEntity else { return false }
+        let townEntity = CoreDataManager.shared.fetchTownEntity(cityName: selectedCity, townName: selectedTown)
+        guard let townEntity = townEntity else {
+            return false
+        }
         let timeGap = abs(Int(townEntity.updateTime!.timeIntervalSinceNow))
         if timeGap > updateTimeSpace { return false }
         for elementName in selectedElementNames {
@@ -274,17 +287,31 @@ class MainViewModel: ObservableObject {
     }
     
     /// 將資料保存到本地設備當中
-    private func saveWeatherInfoIntoCoreData(cityName: String, townName: String, elementNames: [String]) async {
+    @MainActor
+    private func saveWeatherInfoIntoCoreData() {
         guard let weatherInfo = weatherInfo,
-              let weatherElementsInfo = weatherInfo.records.locations.first?.location.first?.weatherElement else { return }
-        var townEntity = CoreDataManager.shared.fetchTownEntity(cityName: cityName)
-        if townEntity != nil {
-            CoreDataManager.shared.deleteEntity(entities: [townEntity!])
+              let weatherElementsInfo = weatherInfo.records.locations.first?.location.first?.weatherElement else {
+            return
         }
-        townEntity = TownEntity(context: CoreDataManager.shared.container.viewContext)
-        guard let townEntity = townEntity else { return }
-        townEntity.name = cityName
+        var cityEntity = CoreDataManager.shared.fetchCityEntity(cityName: selectedCity)
+        if cityEntity == nil {
+            let newCityEntity = CityEntity(context: CoreDataManager.shared.container.viewContext)
+            newCityEntity.name = selectedCity
+            CoreDataManager.shared.saveCoreData()
+            cityEntity = CoreDataManager.shared.fetchCityEntity(cityName: selectedCity)
+        }
+        let oldTownEntity = CoreDataManager.shared.fetchTownEntity(cityName: selectedCity, townName: selectedTown)
+        if oldTownEntity != nil {
+            cityEntity?.removeFromTown(oldTownEntity!)
+            CoreDataManager.shared.deleteEntity(entities: [oldTownEntity!])
+        }
+        let townEntity = TownEntity(context: CoreDataManager.shared.container.viewContext)
+        townEntity.name = selectedTown
         townEntity.updateTime = Date()
+        CoreDataManager.shared.saveCoreData()
+        guard let cityEntity = cityEntity else { return }
+        cityEntity.addToTown(townEntity)
+        CoreDataManager.shared.saveCoreData()
         for weatherElementInfo in weatherElementsInfo {
             let elementName = weatherElementInfo.elementName
             let infos = weatherElementInfo.time
@@ -333,6 +360,9 @@ class MainViewModel: ObservableObject {
                     self.isValidSelect = false
                 } else {
                     self.isValidSelect = true
+                    self.userInfoEntity.selectedCity = self.selectedCity
+                    self.userInfoEntity.selectedTown = self.selectedTown
+                    CoreDataManager.shared.saveCoreData()
                     Task {
                         await MainActor.run { self.isLoadingWeatherInfo.toggle() }
                         await self.searchSelectedPlaceWeather()
@@ -353,5 +383,40 @@ extension MainViewModel {
         case internetQueryError = "請求資料時發生錯誤"
         case dataTransferError = "資料錯誤，請聯絡開發者"
         case loadWeatherInfoFromCoreDataError = "資料讀取錯誤，請聯絡開發者"
+    }
+}
+
+extension MainViewModel {
+    
+    private func deleteAllEntity() {
+        var cs = CoreDataManager.shared.fetchCityEntity()
+        print("City Info")
+        for c in cs! { print(c.name!) }
+        CoreDataManager.shared.deleteEntity(entities: cs!)
+        CoreDataManager.shared.saveCoreData()
+
+        let ts = CoreDataManager.shared.fetchTownEntity()
+        print("Town Info")
+        for t in ts! { print(t.name!) }
+//        CoreDataManager.shared.deleteEntity(entities: ts!)
+//        CoreDataManager.shared.saveCoreData()
+
+        print("Temps")
+        let temps = CoreDataManager.shared.fetchPoPEntity()
+        for tmp in temps! { print(tmp.probability) }
+//        CoreDataManager.shared.deleteEntity(entities: temps!)
+//        CoreDataManager.shared.saveCoreData()
+
+        print("Tempss")
+        let tempss = CoreDataManager.shared.fetchATEntity()
+        for tmp in tempss! { print(tmp.temperature) }
+//        CoreDataManager.shared.deleteEntity(entities: tempss!)
+//        CoreDataManager.shared.saveCoreData()
+
+        print("Tempsss")
+        let tempsss = CoreDataManager.shared.fetchTEntity()
+        for tmp in tempsss! { print(tmp.temperature) }
+//        CoreDataManager.shared.deleteEntity(entities: tempsss!)
+//        CoreDataManager.shared.saveCoreData()
     }
 }
