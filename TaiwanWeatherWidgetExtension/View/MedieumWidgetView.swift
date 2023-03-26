@@ -14,6 +14,7 @@ struct MedieumWidgetView: View {
     var bodyTemperature: [(Int, Date)]
     var timeLine: [Date]
     var info: String
+    var updateCount: Int
     
     var body: some View {
         ZStack {
@@ -25,6 +26,8 @@ struct MedieumWidgetView: View {
                     HStack {
                         Text(selectedTown)
                             .font(Font.custom("ChalkboardSE-Bold", size: 25))
+                            .foregroundColor(Color.white)
+                        Text("\(updateCount)")
                         Spacer()
                         Text("\(temperature.first?.0 ?? 0)° C")
                             .font(Font.custom("ChalkboardSE-Bold", size: 30))
@@ -37,9 +40,11 @@ struct MedieumWidgetView: View {
                             Image(systemName: "thermometer.medium")
                             Image(systemName: "cloud.rain")
                         }
+                        .foregroundColor(Color.white)
                         ForEach(timeLine.prefix(5).indices, id: \.self) { idx in
                             VStack(spacing: 2) {
                                 Text(timeLine[idx].formateToHour())
+                                    .foregroundColor(Color.white)
                                 Text("\(temperature[idx].0)°")
                                     .foregroundColor(Color.getTemperatureColor(temperature: temperature[idx].0))
                                 Text("\(rainRate[idx].0)%")

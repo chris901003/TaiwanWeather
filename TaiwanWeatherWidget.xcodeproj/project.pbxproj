@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		050198FA29CFF39100792453 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053EA4F429C71C1900BF19E1 /* CoreDataManager.swift */; };
 		050198FB29CFF3F100792453 /* TaiwanWeatherWidget.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 053EA4F729C723A400BF19E1 /* TaiwanWeatherWidget.xcdatamodeld */; };
+		050198FE29D02E0C00792453 /* AdBannderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050198FD29D02E0C00792453 /* AdBannderView.swift */; };
 		053EA4F529C71C1900BF19E1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053EA4F429C71C1900BF19E1 /* CoreDataManager.swift */; };
 		053EA4F629C71C1900BF19E1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053EA4F429C71C1900BF19E1 /* CoreDataManager.swift */; };
 		053EA4F929C723A400BF19E1 /* TaiwanWeatherWidget.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 053EA4F729C723A400BF19E1 /* TaiwanWeatherWidget.xcdatamodeld */; };
@@ -54,6 +55,9 @@
 		05F833CE29CB208A007F6394 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F833CD29CB208A007F6394 /* LoadingView.swift */; };
 		05F833D029CB20A0007F6394 /* ErrorMessageShowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F833CF29CB20A0007F6394 /* ErrorMessageShowView.swift */; };
 		05F833D329CB20CC007F6394 /* TransparentBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F833D229CB20CC007F6394 /* TransparentBackground.swift */; };
+		2786EA643FB8F67E232DA27A /* Pods_TaiwanWeatherWidgetIntent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BB4AED8F56B3C418F728070 /* Pods_TaiwanWeatherWidgetIntent.framework */; };
+		5354F862AC993D4A367FE59B /* Pods_TaiwanWeatherWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FCA4DBD4E7518F42F2B2FE1 /* Pods_TaiwanWeatherWidget.framework */; };
+		BFF572A21746FCF19D5784E6 /* Pods_TaiwanWeatherWidgetExtensionExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C1912DD1CF4242EF43743B /* Pods_TaiwanWeatherWidgetExtensionExtension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +93,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		050198FD29D02E0C00792453 /* AdBannderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdBannderView.swift; sourceTree = "<group>"; };
 		053EA4F429C71C1900BF19E1 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		053EA4F829C723A400BF19E1 /* TaiwanWeatherWidget.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaiwanWeatherWidget.xcdatamodel; sourceTree = "<group>"; };
 		053EA4FB29C72E9200BF19E1 /* WeatherApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApiManager.swift; sourceTree = "<group>"; };
@@ -127,6 +132,15 @@
 		05F833CD29CB208A007F6394 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		05F833CF29CB20A0007F6394 /* ErrorMessageShowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessageShowView.swift; sourceTree = "<group>"; };
 		05F833D229CB20CC007F6394 /* TransparentBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentBackground.swift; sourceTree = "<group>"; };
+		3FCA4DBD4E7518F42F2B2FE1 /* Pods_TaiwanWeatherWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaiwanWeatherWidget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5BB4AED8F56B3C418F728070 /* Pods_TaiwanWeatherWidgetIntent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaiwanWeatherWidgetIntent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D6D55A692B18CAEDA2F43F4 /* Pods-TaiwanWeatherWidgetExtensionExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaiwanWeatherWidgetExtensionExtension.release.xcconfig"; path = "Target Support Files/Pods-TaiwanWeatherWidgetExtensionExtension/Pods-TaiwanWeatherWidgetExtensionExtension.release.xcconfig"; sourceTree = "<group>"; };
+		72AE7B7424A8369A83D2E221 /* Pods-TaiwanWeatherWidgetExtensionExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaiwanWeatherWidgetExtensionExtension.debug.xcconfig"; path = "Target Support Files/Pods-TaiwanWeatherWidgetExtensionExtension/Pods-TaiwanWeatherWidgetExtensionExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		BBEEA2BA582284583891377B /* Pods-TaiwanWeatherWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaiwanWeatherWidget.debug.xcconfig"; path = "Target Support Files/Pods-TaiwanWeatherWidget/Pods-TaiwanWeatherWidget.debug.xcconfig"; sourceTree = "<group>"; };
+		C9B11B466850483C64147A7B /* Pods-TaiwanWeatherWidgetIntent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaiwanWeatherWidgetIntent.debug.xcconfig"; path = "Target Support Files/Pods-TaiwanWeatherWidgetIntent/Pods-TaiwanWeatherWidgetIntent.debug.xcconfig"; sourceTree = "<group>"; };
+		D88F11A44035833BB4CE0C9D /* Pods-TaiwanWeatherWidgetIntent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaiwanWeatherWidgetIntent.release.xcconfig"; path = "Target Support Files/Pods-TaiwanWeatherWidgetIntent/Pods-TaiwanWeatherWidgetIntent.release.xcconfig"; sourceTree = "<group>"; };
+		E6BC324ACA82644C985ACE9A /* Pods-TaiwanWeatherWidget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TaiwanWeatherWidget.release.xcconfig"; path = "Target Support Files/Pods-TaiwanWeatherWidget/Pods-TaiwanWeatherWidget.release.xcconfig"; sourceTree = "<group>"; };
+		F2C1912DD1CF4242EF43743B /* Pods_TaiwanWeatherWidgetExtensionExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TaiwanWeatherWidgetExtensionExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				054D3E6D29CFE0EE00E1CAC0 /* Intents.framework in Frameworks */,
+				2786EA643FB8F67E232DA27A /* Pods_TaiwanWeatherWidgetIntent.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +157,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5354F862AC993D4A367FE59B /* Pods_TaiwanWeatherWidget.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,12 +167,21 @@
 			files = (
 				05C62C8C29C70400007CFE8F /* SwiftUI.framework in Frameworks */,
 				05C62C8A29C70400007CFE8F /* WidgetKit.framework in Frameworks */,
+				BFF572A21746FCF19D5784E6 /* Pods_TaiwanWeatherWidgetExtensionExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		050198FC29D02E0000792453 /* Ad */ = {
+			isa = PBXGroup;
+			children = (
+				050198FD29D02E0C00792453 /* AdBannderView.swift */,
+			);
+			path = Ad;
+			sourceTree = "<group>";
+		};
 		054D3E5729CF2A4E00E1CAC0 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +218,7 @@
 				054D3E6E29CFE0EE00E1CAC0 /* TaiwanWeatherWidgetIntent */,
 				05C62C8829C703FF007CFE8F /* Frameworks */,
 				05C62C6729C6EB59007CFE8F /* Products */,
+				7CAABAC6F99600CA383461F7 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -235,6 +261,7 @@
 		05C62C7729C6EBB5007CFE8F /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				050198FC29D02E0000792453 /* Ad */,
 				05C62C8029C6FDE7007CFE8F /* CommonView */,
 				05C62C7829C6EBD5007CFE8F /* Home */,
 			);
@@ -283,6 +310,9 @@
 				05C62C8929C703FF007CFE8F /* WidgetKit.framework */,
 				05C62C8B29C70400007CFE8F /* SwiftUI.framework */,
 				054D3E6C29CFE0EE00E1CAC0 /* Intents.framework */,
+				3FCA4DBD4E7518F42F2B2FE1 /* Pods_TaiwanWeatherWidget.framework */,
+				F2C1912DD1CF4242EF43743B /* Pods_TaiwanWeatherWidgetExtensionExtension.framework */,
+				5BB4AED8F56B3C418F728070 /* Pods_TaiwanWeatherWidgetIntent.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -337,6 +367,19 @@
 			path = DataCode;
 			sourceTree = "<group>";
 		};
+		7CAABAC6F99600CA383461F7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BBEEA2BA582284583891377B /* Pods-TaiwanWeatherWidget.debug.xcconfig */,
+				E6BC324ACA82644C985ACE9A /* Pods-TaiwanWeatherWidget.release.xcconfig */,
+				72AE7B7424A8369A83D2E221 /* Pods-TaiwanWeatherWidgetExtensionExtension.debug.xcconfig */,
+				6D6D55A692B18CAEDA2F43F4 /* Pods-TaiwanWeatherWidgetExtensionExtension.release.xcconfig */,
+				C9B11B466850483C64147A7B /* Pods-TaiwanWeatherWidgetIntent.debug.xcconfig */,
+				D88F11A44035833BB4CE0C9D /* Pods-TaiwanWeatherWidgetIntent.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -344,6 +387,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 054D3E7529CFE0EE00E1CAC0 /* Build configuration list for PBXNativeTarget "TaiwanWeatherWidgetIntent" */;
 			buildPhases = (
+				9812835115E73A37ED2464EB /* [CP] Check Pods Manifest.lock */,
 				054D3E6729CFE0EE00E1CAC0 /* Sources */,
 				054D3E6829CFE0EE00E1CAC0 /* Frameworks */,
 				054D3E6929CFE0EE00E1CAC0 /* Resources */,
@@ -361,10 +405,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 05C62C7429C6EB5B007CFE8F /* Build configuration list for PBXNativeTarget "TaiwanWeatherWidget" */;
 			buildPhases = (
+				DD083EFEB37ECD2AE4161598 /* [CP] Check Pods Manifest.lock */,
 				05C62C6229C6EB59007CFE8F /* Sources */,
 				05C62C6329C6EB59007CFE8F /* Frameworks */,
 				05C62C6429C6EB59007CFE8F /* Resources */,
 				05C62C9B29C70400007CFE8F /* Embed Foundation Extensions */,
+				646B0C693436B2D1B2511EED /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -381,6 +427,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 05C62C9829C70400007CFE8F /* Build configuration list for PBXNativeTarget "TaiwanWeatherWidgetExtensionExtension" */;
 			buildPhases = (
+				8138319182F739D667B7CD20 /* [CP] Check Pods Manifest.lock */,
 				05C62C8329C703FF007CFE8F /* Sources */,
 				05C62C8429C703FF007CFE8F /* Frameworks */,
 				05C62C8529C703FF007CFE8F /* Resources */,
@@ -462,6 +509,92 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		646B0C693436B2D1B2511EED /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TaiwanWeatherWidget/Pods-TaiwanWeatherWidget-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TaiwanWeatherWidget/Pods-TaiwanWeatherWidget-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TaiwanWeatherWidget/Pods-TaiwanWeatherWidget-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8138319182F739D667B7CD20 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TaiwanWeatherWidgetExtensionExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9812835115E73A37ED2464EB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TaiwanWeatherWidgetIntent-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DD083EFEB37ECD2AE4161598 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TaiwanWeatherWidget-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		054D3E6729CFE0EE00E1CAC0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -497,6 +630,7 @@
 				053EA4FC29C72E9200BF19E1 /* WeatherApiManager.swift in Sources */,
 				05C62C7F29C6F7D8007CFE8F /* MainViewModel.swift in Sources */,
 				05F833CE29CB208A007F6394 /* LoadingView.swift in Sources */,
+				050198FE29D02E0C00792453 /* AdBannderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,10 +675,11 @@
 /* Begin XCBuildConfiguration section */
 		054D3E7629CFE0EE00E1CAC0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C9B11B466850483C64147A7B /* Pods-TaiwanWeatherWidgetIntent.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = TaiwanWeatherWidgetIntent/TaiwanWeatherWidgetIntent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = L4D6WNQFVL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TaiwanWeatherWidgetIntent/Info.plist;
@@ -567,10 +702,11 @@
 		};
 		054D3E7729CFE0EE00E1CAC0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D88F11A44035833BB4CE0C9D /* Pods-TaiwanWeatherWidgetIntent.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = TaiwanWeatherWidgetIntent/TaiwanWeatherWidgetIntent.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = L4D6WNQFVL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TaiwanWeatherWidgetIntent/Info.plist;
@@ -707,13 +843,14 @@
 		};
 		05C62C7529C6EB5B007CFE8F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BBEEA2BA582284583891377B /* Pods-TaiwanWeatherWidget.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TaiwanWeatherWidget/TaiwanWeatherWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"TaiwanWeatherWidget/Preview Content\"";
 				DEVELOPMENT_TEAM = L4D6WNQFVL;
 				ENABLE_PREVIEWS = YES;
@@ -742,13 +879,14 @@
 		};
 		05C62C7629C6EB5B007CFE8F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E6BC324ACA82644C985ACE9A /* Pods-TaiwanWeatherWidget.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TaiwanWeatherWidget/TaiwanWeatherWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"TaiwanWeatherWidget/Preview Content\"";
 				DEVELOPMENT_TEAM = L4D6WNQFVL;
 				ENABLE_PREVIEWS = YES;
@@ -777,6 +915,7 @@
 		};
 		05C62C9929C70400007CFE8F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72AE7B7424A8369A83D2E221 /* Pods-TaiwanWeatherWidgetExtensionExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
@@ -805,6 +944,7 @@
 		};
 		05C62C9A29C70400007CFE8F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6D6D55A692B18CAEDA2F43F4 /* Pods-TaiwanWeatherWidgetExtensionExtension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;

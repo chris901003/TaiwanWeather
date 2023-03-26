@@ -23,7 +23,7 @@ struct Provider: IntentTimelineProvider {
             await manager.fetchWeatherInfo()
             var weatherInfoEntry = WeatherInfoEntry(date: currentDate, selectedTown: manager.selectedTown, temperature: manager.temperature, rainRate: manager.rainRate, bodyTemperature: manager.bodyTemperature, timeLine: manager.timeLine)
             if manager.isError {
-                weatherInfoEntry.info = "網路連線錯誤，請檢查網路狀態"
+                weatherInfoEntry.info = manager.errorMessage
             }
             completion(weatherInfoEntry)
         }
@@ -31,6 +31,7 @@ struct Provider: IntentTimelineProvider {
     
     func getTimeline(for configuration: SelectLocationIntent, in context: Context, completion: @escaping (Timeline<WeatherInfoEntry>) -> Void) {
         Task {
+            let nextUpdate = Date().addingTimeInterval(3600)
             if let selectLocationString = configuration.Location {
                 manager.getUserSelectedLocation(selectedLocation: selectLocationString)
             } else {
@@ -40,9 +41,10 @@ struct Provider: IntentTimelineProvider {
             await manager.fetchWeatherInfo()
             var weatherInfoEntry = WeatherInfoEntry(date: currentDate, selectedTown: manager.selectedTown, temperature: manager.temperature, rainRate: manager.rainRate, bodyTemperature: manager.bodyTemperature, timeLine: manager.timeLine)
             if manager.isError {
-                weatherInfoEntry.info = "網路錯誤，請稍後再試"
+                weatherInfoEntry.info = manager.errorMessage
             }
-            let timeline = Timeline(entries: [weatherInfoEntry], policy: .atEnd)
+            weatherInfoEntry.updateCount = manager.updateCount
+            let timeline = Timeline(entries: [weatherInfoEntry], policy: .after(nextUpdate))
             completion(timeline)
         }
     }
@@ -57,6 +59,7 @@ struct WeatherInfoEntry: TimelineEntry {
     var timeLine: [Date] = []
     
     var info: String = ""
+    var updateCount: Int = 0
 }
 
 struct TaiwanWeatherWidgetExtensionEntryView : View {
@@ -68,7 +71,7 @@ struct TaiwanWeatherWidgetExtensionEntryView : View {
         case .systemSmall:
             SmallWidgetView(selectedTown: entry.selectedTown, temperature: entry.temperature.first?.0 ?? 0, rainRate: entry.rainRate.first?.0 ?? 0, info: entry.info)
         case .systemMedium:
-            MedieumWidgetView(selectedTown: entry.selectedTown, temperature: entry.temperature, rainRate: entry.rainRate, bodyTemperature: entry.bodyTemperature, timeLine: entry.timeLine, info: entry.info)
+            MedieumWidgetView(selectedTown: entry.selectedTown, temperature: entry.temperature, rainRate: entry.rainRate, bodyTemperature: entry.bodyTemperature, timeLine: entry.timeLine, info: entry.info, updateCount: entry.updateCount)
         default:
             Text("Error")
         }

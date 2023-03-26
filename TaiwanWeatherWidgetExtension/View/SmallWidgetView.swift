@@ -21,6 +21,7 @@ struct SmallWidgetView: View {
                 .aspectRatio(contentMode: .fill)
             VStack {
                 Text(selectedTown)
+                    .foregroundColor(Color.white)
                     .font(.title)
                     .bold()
                 Text("\(temperature)° C")

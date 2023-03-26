@@ -26,6 +26,8 @@ struct HomeView: View {
                 weatherInfoSection
                 
                 Spacer()
+                AdBannderView(unitID: "ca-app-pub-3940256099942544/2934735716")
+                    .frame(height: 50)
             }
             seletCitySection
             selectTownSection
@@ -74,6 +76,11 @@ struct HomeView: View {
                 .foregroundColor(Color.secondary)
                 .font(.headline)
             Text("使用公用授權碼，當次數達到上限時當天將不再更新")
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                .foregroundColor(Color.secondary)
+                .font(.headline)
+            Text("不填寫也可以使用")
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
                 .foregroundColor(Color.secondary)

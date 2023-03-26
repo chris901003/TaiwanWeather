@@ -11,7 +11,8 @@ import WidgetKit
 class ProviderManager {
     
     // Public Variable
-    var t: String = ""
+    var updateCount: Int = 0
+    var errorMessage: String = ""
     var selectedCity: String = ""
     var selectedTown: String = ""
     var temperature: [(Int, Date)] = []
@@ -53,6 +54,8 @@ class ProviderManager {
     func fetchWeatherInfo() async {
         guard selectedCity != "-" && selectedTown != "-" else { return }
         isError = false
+        errorMessage = ""
+        updateCount += 1
         removeAllWeatherInfo()
         if SharedInfoManager.shared.exclusiveAuthorizationCode == "" {
             // 若使用公用授權碼將受限於請求次數，優先使用本地資料
@@ -77,17 +80,20 @@ class ProviderManager {
         case .success(let resultData):
             guard let returnedWeatherInfo = try? JSONDecoder().decode(WeatherInfoModel.self, from: resultData) else {
                 isError = true
+                errorMessage = "Json解碼錯誤"
                 return
             }
             weatherInfo = returnedWeatherInfo
         case .failure(_):
             isError = true
+            errorMessage = "網路請求錯誤"
             return
         }
         
         guard let weatherInfo = weatherInfo else { return }
         guard weatherInfo.success == "true" else {
             isError = true
+            errorMessage = "請求回傳錯誤"
             return
         }
         
@@ -98,6 +104,7 @@ class ProviderManager {
         // 調用從CoreData中獲取天氣資料
         guard await loadWeatherInfoFromCoreData() else {
             isError = true
+            errorMessage = "本地讀取資料錯誤"
             return
         }
         

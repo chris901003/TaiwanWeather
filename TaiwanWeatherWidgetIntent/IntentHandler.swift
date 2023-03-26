@@ -36,7 +36,11 @@ extension IntentHandler: SelectLocationIntentHandling {
         if let userInfo = CoreDataManager.shared.fetchUserInfo() {
             let selectedCity = userInfo.selectedCity!
             let selectedTown = userInfo.selectedTown!
-            return selectedCity + " " + selectedTown
+            if selectedCity != "-" && selectedTown != "-" {
+                return selectedCity + " " + selectedTown
+            } else {
+                return "新北市 樹林區"
+            }
         } else {
             return "新北市 樹林區"
         }
