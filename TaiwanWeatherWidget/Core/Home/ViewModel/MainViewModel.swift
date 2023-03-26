@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import WidgetKit
 
 class MainViewModel: ObservableObject {
     
@@ -389,7 +390,7 @@ extension MainViewModel {
 extension MainViewModel {
     
     private func deleteAllEntity() {
-        var cs = CoreDataManager.shared.fetchCityEntity()
+        let cs = CoreDataManager.shared.fetchCityEntity()
         print("City Info")
         for c in cs! { print(c.name!) }
         CoreDataManager.shared.deleteEntity(entities: cs!)

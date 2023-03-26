@@ -8,31 +8,41 @@
 import WidgetKit
 import SwiftUI
 
-struct Provider: TimelineProvider {
+struct Provider: IntentTimelineProvider {
     
-//    private var manager: ProviderManager = ProviderManager()
+    private var manager: ProviderManager = ProviderManager()
     
     func placeholder(in context: Context) -> WeatherInfoEntry {
-        WeatherInfoEntry(date: Date())
+        WeatherInfoEntry(date: Date(), info: "我只是固定顯示")
     }
-
-    func getSnapshot(in context: Context, completion: @escaping (WeatherInfoEntry) -> ()) {
-        Task {
-            var entry = WeatherInfoEntry(date: Date())
-            entry.info = await ProviderManager.getInfo()
-            completion(entry)
-        }
-    }
-
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
+    
+    func getSnapshot(for configuration: SelectLocationIntent, in context: Context, completion: @escaping (WeatherInfoEntry) -> Void) {
         Task {
             let currentDate = Date()
-            let entryDate = Calendar.current.date(byAdding: .hour, value: 1, to: currentDate)!
-            var entry = WeatherInfoEntry(date: entryDate)
-            entry.info = await ProviderManager.getInfo()
-            let timeline = Timeline(entries: [entry], policy: .atEnd)
+            manager.getUserSelectedLocation()
+            await manager.fetchWeatherInfo()
+            var weatherInfoEntry = WeatherInfoEntry(date: currentDate, selectedTown: manager.selectedTown, temperature: manager.temperature, rainRate: manager.rainRate, bodyTemperature: manager.bodyTemperature, timeLine: manager.timeLine)
+            if manager.isError {
+                weatherInfoEntry.info = "網路連線錯誤，請檢查網路狀態"
+            }
+            completion(weatherInfoEntry)
+        }
+    }
+    
+    func getTimeline(for configuration: SelectLocationIntent, in context: Context, completion: @escaping (Timeline<WeatherInfoEntry>) -> Void) {
+        Task {
+            if let selectLocationString = configuration.Location {
+                manager.getUserSelectedLocation(selectedLocation: selectLocationString)
+            } else {
+                manager.getUserSelectedLocation()
+            }
+            let currentDate = Date()
+            await manager.fetchWeatherInfo()
+            var weatherInfoEntry = WeatherInfoEntry(date: currentDate, selectedTown: manager.selectedTown, temperature: manager.temperature, rainRate: manager.rainRate, bodyTemperature: manager.bodyTemperature, timeLine: manager.timeLine)
+            if manager.isError {
+                weatherInfoEntry.info = "網路錯誤，請稍後再試"
+            }
+            let timeline = Timeline(entries: [weatherInfoEntry], policy: .atEnd)
             completion(timeline)
         }
     }
@@ -40,6 +50,7 @@ struct Provider: TimelineProvider {
 
 struct WeatherInfoEntry: TimelineEntry {
     let date: Date
+    var selectedTown: String = ""
     var temperature: [(Int, Date)] = []
     var rainRate: [(Int, Date)] = []
     var bodyTemperature: [(Int, Date)] = []
@@ -49,11 +60,18 @@ struct WeatherInfoEntry: TimelineEntry {
 }
 
 struct TaiwanWeatherWidgetExtensionEntryView : View {
+    @Environment(\.widgetFamily) var family
     var entry: Provider.Entry
-    let t = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.hungyen.TaiwanWeatherWidget")?.appending(path: "Weather")
 
     var body: some View {
-        Text(entry.info)
+        switch family {
+        case .systemSmall:
+            SmallWidgetView(selectedTown: entry.selectedTown, temperature: entry.temperature.first?.0 ?? 0, rainRate: entry.rainRate.first?.0 ?? 0, info: entry.info)
+        case .systemMedium:
+            MedieumWidgetView(selectedTown: entry.selectedTown, temperature: entry.temperature, rainRate: entry.rainRate, bodyTemperature: entry.bodyTemperature, timeLine: entry.timeLine, info: entry.info)
+        default:
+            Text("Error")
+        }
     }
 }
 
@@ -61,11 +79,11 @@ struct TaiwanWeatherWidgetExtension: Widget {
     let kind: String = "TaiwanWeatherWidgetExtension"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+        IntentConfiguration(kind: kind, intent: SelectLocationIntent.self, provider: Provider()) { entry in
             TaiwanWeatherWidgetExtensionEntryView(entry: entry)
         }
         .configurationDisplayName("天氣")
         .description("獲取當地天氣")
-        .supportedFamilies([.systemMedium])
+        .supportedFamilies([.systemSmall, .systemMedium])
     }
 }

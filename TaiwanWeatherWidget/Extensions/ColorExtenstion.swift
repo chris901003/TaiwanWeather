@@ -12,6 +12,7 @@ struct ColorTheme {
     
     let temperatureColor: [String: Color] = ["veryColdColor": Color(hex: "#5BC0F8"), "coldColor": Color(hex: "#86E5FF"), "warmColor": Color(hex: "#FFC93C"), "littleHotColor": Color(hex: "#FF8787"), "mediumHotColor": Color(hex: "#E64848"), "veryHotColor": Color(hex: "#C21010")]
     let rainRateColor: [String: Color] = ["rate20": Color(hex: "#00FFF6"), "rate40": Color(hex: "#00E7FF"), "rate60": Color(hex: "009EFF"), "rate80": Color(hex: "#0014FF"), "rate100": Color(hex: "#070D59")]
+    let widgetRainRateColor: [String: Color] = ["rate20": Color(hex: "#EFFFFD"), "rate40": Color(hex: "#B8FFF9"), "rate60": Color(hex: "#85F4FF"), "rate80": Color(hex: "42C2FF"), "rate100": Color(hex: "#00B4D8")]
 }
 
 extension Color {
@@ -49,6 +50,20 @@ extension Color {
             return self.theme.rainRateColor["rate80"]!
         } else {
             return self.theme.rainRateColor["rate100"]!
+        }
+    }
+    
+    static func getWidgetRainRateColor(rainRate: Int) -> Color {
+        if rainRate <= 20 {
+            return self.theme.widgetRainRateColor["rate20"]!
+        } else if rainRate <= 40 {
+            return self.theme.widgetRainRateColor["rate40"]!
+        } else if rainRate <= 60 {
+            return self.theme.widgetRainRateColor["rate60"]!
+        } else if rainRate <= 80 {
+            return self.theme.widgetRainRateColor["rate80"]!
+        } else {
+            return self.theme.widgetRainRateColor["rate100"]!
         }
     }
 }

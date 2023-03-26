@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050198FA29CFF39100792453 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053EA4F429C71C1900BF19E1 /* CoreDataManager.swift */; };
+		050198FB29CFF3F100792453 /* TaiwanWeatherWidget.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 053EA4F729C723A400BF19E1 /* TaiwanWeatherWidget.xcdatamodeld */; };
 		053EA4F529C71C1900BF19E1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053EA4F429C71C1900BF19E1 /* CoreDataManager.swift */; };
 		053EA4F629C71C1900BF19E1 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053EA4F429C71C1900BF19E1 /* CoreDataManager.swift */; };
 		053EA4F929C723A400BF19E1 /* TaiwanWeatherWidget.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 053EA4F729C723A400BF19E1 /* TaiwanWeatherWidget.xcdatamodeld */; };
@@ -19,6 +21,20 @@
 		054D3E4D29CDEB7400E1CAC0 /* ProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D3E4B29CDEB4C00E1CAC0 /* ProviderManager.swift */; };
 		054D3E4E29CDF1C200E1CAC0 /* DataCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E281AE29CB2DD300BBC58F /* DataCodeModel.swift */; };
 		054D3E4F29CDF1CE00E1CAC0 /* WeatherInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A83FFF29CBEE2500327C60 /* WeatherInfoModel.swift */; };
+		054D3E5029CF0F1F00E1CAC0 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D3E4729CC96C700E1CAC0 /* DateExtension.swift */; };
+		054D3E5429CF222300E1CAC0 /* ColorExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D3E4929CDC29900E1CAC0 /* ColorExtenstion.swift */; };
+		054D3E5629CF28FD00E1CAC0 /* MedieumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D3E5529CF28FD00E1CAC0 /* MedieumWidgetView.swift */; };
+		054D3E5929CF2A6300E1CAC0 /* SmallWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D3E5829CF2A6300E1CAC0 /* SmallWidgetView.swift */; };
+		054D3E5A29CF33F300E1CAC0 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C62C7E29C6F7D8007CFE8F /* MainViewModel.swift */; };
+		054D3E6229CF408A00E1CAC0 /* WidgetCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D3E6129CF408A00E1CAC0 /* WidgetCoreDataManager.swift */; };
+		054D3E6329CF40BE00E1CAC0 /* WidgetCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D3E6129CF408A00E1CAC0 /* WidgetCoreDataManager.swift */; };
+		054D3E6529CFDF9E00E1CAC0 /* TaiwanWeatherWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 054D3E6429CFDF9E00E1CAC0 /* TaiwanWeatherWidgetIntent.intentdefinition */; };
+		054D3E6629CFDF9E00E1CAC0 /* TaiwanWeatherWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 054D3E6429CFDF9E00E1CAC0 /* TaiwanWeatherWidgetIntent.intentdefinition */; };
+		054D3E6D29CFE0EE00E1CAC0 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 054D3E6C29CFE0EE00E1CAC0 /* Intents.framework */; };
+		054D3E7029CFE0EE00E1CAC0 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D3E6F29CFE0EE00E1CAC0 /* IntentHandler.swift */; };
+		054D3E7429CFE0EE00E1CAC0 /* TaiwanWeatherWidgetIntent.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 054D3E6B29CFE0EE00E1CAC0 /* TaiwanWeatherWidgetIntent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		054D3E7929CFE1DB00E1CAC0 /* TaiwanWeatherWidgetIntent.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 054D3E6429CFDF9E00E1CAC0 /* TaiwanWeatherWidgetIntent.intentdefinition */; };
+		054D3E7A29CFE24600E1CAC0 /* DataCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E281AE29CB2DD300BBC58F /* DataCodeModel.swift */; };
 		05A8400029CBEE2500327C60 /* WeatherInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A83FFF29CBEE2500327C60 /* WeatherInfoModel.swift */; };
 		05C62C6A29C6EB59007CFE8F /* TaiwanWeatherWidgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C62C6929C6EB59007CFE8F /* TaiwanWeatherWidgetApp.swift */; };
 		05C62C6E29C6EB5B007CFE8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05C62C6D29C6EB5B007CFE8F /* Assets.xcassets */; };
@@ -41,6 +57,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		054D3E7229CFE0EE00E1CAC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05C62C5E29C6EB59007CFE8F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 054D3E6A29CFE0EE00E1CAC0;
+			remoteInfo = TaiwanWeatherWidgetIntent;
+		};
 		05C62C9529C70400007CFE8F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 05C62C5E29C6EB59007CFE8F /* Project object */;
@@ -58,6 +81,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				05C62C9729C70400007CFE8F /* TaiwanWeatherWidgetExtensionExtension.appex in Embed Foundation Extensions */,
+				054D3E7429CFE0EE00E1CAC0 /* TaiwanWeatherWidgetIntent.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,6 +95,15 @@
 		054D3E4729CC96C700E1CAC0 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		054D3E4929CDC29900E1CAC0 /* ColorExtenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtenstion.swift; sourceTree = "<group>"; };
 		054D3E4B29CDEB4C00E1CAC0 /* ProviderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderManager.swift; sourceTree = "<group>"; };
+		054D3E5529CF28FD00E1CAC0 /* MedieumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedieumWidgetView.swift; sourceTree = "<group>"; };
+		054D3E5829CF2A6300E1CAC0 /* SmallWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWidgetView.swift; sourceTree = "<group>"; };
+		054D3E6129CF408A00E1CAC0 /* WidgetCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetCoreDataManager.swift; sourceTree = "<group>"; };
+		054D3E6429CFDF9E00E1CAC0 /* TaiwanWeatherWidgetIntent.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = TaiwanWeatherWidgetIntent.intentdefinition; sourceTree = "<group>"; };
+		054D3E6B29CFE0EE00E1CAC0 /* TaiwanWeatherWidgetIntent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TaiwanWeatherWidgetIntent.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		054D3E6C29CFE0EE00E1CAC0 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
+		054D3E6F29CFE0EE00E1CAC0 /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
+		054D3E7129CFE0EE00E1CAC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		054D3E7829CFE11400E1CAC0 /* TaiwanWeatherWidgetIntent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TaiwanWeatherWidgetIntent.entitlements; sourceTree = "<group>"; };
 		05A83FFF29CBEE2500327C60 /* WeatherInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfoModel.swift; sourceTree = "<group>"; };
 		05C62C6629C6EB59007CFE8F /* TaiwanWeatherWidget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaiwanWeatherWidget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C62C6929C6EB59007CFE8F /* TaiwanWeatherWidgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaiwanWeatherWidgetApp.swift; sourceTree = "<group>"; };
@@ -97,6 +130,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		054D3E6829CFE0EE00E1CAC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				054D3E6D29CFE0EE00E1CAC0 /* Intents.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		05C62C6329C6EB59007CFE8F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -116,6 +157,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		054D3E5729CF2A4E00E1CAC0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				054D3E5829CF2A6300E1CAC0 /* SmallWidgetView.swift */,
+				054D3E5529CF28FD00E1CAC0 /* MedieumWidgetView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		054D3E6E29CFE0EE00E1CAC0 /* TaiwanWeatherWidgetIntent */ = {
+			isa = PBXGroup;
+			children = (
+				054D3E7829CFE11400E1CAC0 /* TaiwanWeatherWidgetIntent.entitlements */,
+				054D3E6F29CFE0EE00E1CAC0 /* IntentHandler.swift */,
+				054D3E7129CFE0EE00E1CAC0 /* Info.plist */,
+			);
+			path = TaiwanWeatherWidgetIntent;
+			sourceTree = "<group>";
+		};
 		05A83FFE29CBEE0A00327C60 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +190,7 @@
 				05C62C9D29C70582007CFE8F /* TaiwanWeatherWidgetExtensionExtension.entitlements */,
 				05C62C6829C6EB59007CFE8F /* TaiwanWeatherWidget */,
 				05C62C8D29C70400007CFE8F /* TaiwanWeatherWidgetExtension */,
+				054D3E6E29CFE0EE00E1CAC0 /* TaiwanWeatherWidgetIntent */,
 				05C62C8829C703FF007CFE8F /* Frameworks */,
 				05C62C6729C6EB59007CFE8F /* Products */,
 			);
@@ -140,6 +201,7 @@
 			children = (
 				05C62C6629C6EB59007CFE8F /* TaiwanWeatherWidget.app */,
 				05C62C8729C703FF007CFE8F /* TaiwanWeatherWidgetExtensionExtension.appex */,
+				054D3E6B29CFE0EE00E1CAC0 /* TaiwanWeatherWidgetIntent.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -220,6 +282,7 @@
 			children = (
 				05C62C8929C703FF007CFE8F /* WidgetKit.framework */,
 				05C62C8B29C70400007CFE8F /* SwiftUI.framework */,
+				054D3E6C29CFE0EE00E1CAC0 /* Intents.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -230,8 +293,11 @@
 				05C62C8E29C70400007CFE8F /* TaiwanWeatherWidgetExtensionBundle.swift */,
 				05C62C9029C70400007CFE8F /* TaiwanWeatherWidgetExtension.swift */,
 				054D3E4B29CDEB4C00E1CAC0 /* ProviderManager.swift */,
+				054D3E6129CF408A00E1CAC0 /* WidgetCoreDataManager.swift */,
+				054D3E5729CF2A4E00E1CAC0 /* View */,
 				05C62C9229C70400007CFE8F /* Assets.xcassets */,
 				05C62C9429C70400007CFE8F /* Info.plist */,
+				054D3E6429CFDF9E00E1CAC0 /* TaiwanWeatherWidgetIntent.intentdefinition */,
 			);
 			path = TaiwanWeatherWidgetExtension;
 			sourceTree = "<group>";
@@ -274,6 +340,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		054D3E6A29CFE0EE00E1CAC0 /* TaiwanWeatherWidgetIntent */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 054D3E7529CFE0EE00E1CAC0 /* Build configuration list for PBXNativeTarget "TaiwanWeatherWidgetIntent" */;
+			buildPhases = (
+				054D3E6729CFE0EE00E1CAC0 /* Sources */,
+				054D3E6829CFE0EE00E1CAC0 /* Frameworks */,
+				054D3E6929CFE0EE00E1CAC0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TaiwanWeatherWidgetIntent;
+			productName = TaiwanWeatherWidgetIntent;
+			productReference = 054D3E6B29CFE0EE00E1CAC0 /* TaiwanWeatherWidgetIntent.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		05C62C6529C6EB59007CFE8F /* TaiwanWeatherWidget */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 05C62C7429C6EB5B007CFE8F /* Build configuration list for PBXNativeTarget "TaiwanWeatherWidget" */;
@@ -287,6 +370,7 @@
 			);
 			dependencies = (
 				05C62C9629C70400007CFE8F /* PBXTargetDependency */,
+				054D3E7329CFE0EE00E1CAC0 /* PBXTargetDependency */,
 			);
 			name = TaiwanWeatherWidget;
 			productName = TaiwanWeatherWidget;
@@ -320,6 +404,9 @@
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					054D3E6A29CFE0EE00E1CAC0 = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					05C62C6529C6EB59007CFE8F = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -343,11 +430,19 @@
 			targets = (
 				05C62C6529C6EB59007CFE8F /* TaiwanWeatherWidget */,
 				05C62C8629C703FF007CFE8F /* TaiwanWeatherWidgetExtensionExtension */,
+				054D3E6A29CFE0EE00E1CAC0 /* TaiwanWeatherWidgetIntent */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		054D3E6929CFE0EE00E1CAC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		05C62C6429C6EB59007CFE8F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -368,10 +463,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		054D3E6729CFE0EE00E1CAC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				050198FB29CFF3F100792453 /* TaiwanWeatherWidget.xcdatamodeld in Sources */,
+				054D3E7029CFE0EE00E1CAC0 /* IntentHandler.swift in Sources */,
+				054D3E7929CFE1DB00E1CAC0 /* TaiwanWeatherWidgetIntent.intentdefinition in Sources */,
+				050198FA29CFF39100792453 /* CoreDataManager.swift in Sources */,
+				054D3E7A29CFE24600E1CAC0 /* DataCodeModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		05C62C6229C6EB59007CFE8F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				054D3E6329CF40BE00E1CAC0 /* WidgetCoreDataManager.swift in Sources */,
 				05F833D029CB20A0007F6394 /* ErrorMessageShowView.swift in Sources */,
 				054D3E4829CC96C700E1CAC0 /* DateExtension.swift in Sources */,
 				05C62C8229C6FDF9007CFE8F /* AnimationCheckView.swift in Sources */,
@@ -382,6 +490,7 @@
 				05F833CB29CB1CB5007F6394 /* SharedInfoManager.swift in Sources */,
 				05F833D329CB20CC007F6394 /* TransparentBackground.swift in Sources */,
 				053EA4F529C71C1900BF19E1 /* CoreDataManager.swift in Sources */,
+				054D3E6529CFDF9E00E1CAC0 /* TaiwanWeatherWidgetIntent.intentdefinition in Sources */,
 				054D3E4A29CDC29900E1CAC0 /* ColorExtenstion.swift in Sources */,
 				05E281AF29CB2DD300BBC58F /* DataCodeModel.swift in Sources */,
 				053EA4F929C723A400BF19E1 /* TaiwanWeatherWidget.xcdatamodeld in Sources */,
@@ -396,13 +505,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				054D3E4F29CDF1CE00E1CAC0 /* WeatherInfoModel.swift in Sources */,
+				054D3E5029CF0F1F00E1CAC0 /* DateExtension.swift in Sources */,
+				054D3E6229CF408A00E1CAC0 /* WidgetCoreDataManager.swift in Sources */,
 				053EA4FA29C723A400BF19E1 /* TaiwanWeatherWidget.xcdatamodeld in Sources */,
+				054D3E5629CF28FD00E1CAC0 /* MedieumWidgetView.swift in Sources */,
 				053EA4F629C71C1900BF19E1 /* CoreDataManager.swift in Sources */,
+				054D3E5429CF222300E1CAC0 /* ColorExtenstion.swift in Sources */,
 				05F833CC29CB1FA9007F6394 /* SharedInfoManager.swift in Sources */,
+				054D3E5A29CF33F300E1CAC0 /* MainViewModel.swift in Sources */,
 				053EA4FD29C72E9200BF19E1 /* WeatherApiManager.swift in Sources */,
 				054D3E4E29CDF1C200E1CAC0 /* DataCodeModel.swift in Sources */,
 				054D3E4D29CDEB7400E1CAC0 /* ProviderManager.swift in Sources */,
 				05C62C9129C70400007CFE8F /* TaiwanWeatherWidgetExtension.swift in Sources */,
+				054D3E6629CFDF9E00E1CAC0 /* TaiwanWeatherWidgetIntent.intentdefinition in Sources */,
+				054D3E5929CF2A6300E1CAC0 /* SmallWidgetView.swift in Sources */,
 				05C62C8F29C70400007CFE8F /* TaiwanWeatherWidgetExtensionBundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,6 +526,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		054D3E7329CFE0EE00E1CAC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 054D3E6A29CFE0EE00E1CAC0 /* TaiwanWeatherWidgetIntent */;
+			targetProxy = 054D3E7229CFE0EE00E1CAC0 /* PBXContainerItemProxy */;
+		};
 		05C62C9629C70400007CFE8F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 05C62C8629C703FF007CFE8F /* TaiwanWeatherWidgetExtensionExtension */;
@@ -418,6 +539,58 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		054D3E7629CFE0EE00E1CAC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TaiwanWeatherWidgetIntent/TaiwanWeatherWidgetIntent.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L4D6WNQFVL;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TaiwanWeatherWidgetIntent/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TaiwanWeatherWidgetIntent;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hungyen.TaiwanWeatherWidget.TaiwanWeatherWidgetIntent;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		054D3E7729CFE0EE00E1CAC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = TaiwanWeatherWidgetIntent/TaiwanWeatherWidgetIntent.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L4D6WNQFVL;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TaiwanWeatherWidgetIntent/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = TaiwanWeatherWidgetIntent;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hungyen.TaiwanWeatherWidget.TaiwanWeatherWidgetIntent;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		05C62C7229C6EB5B007CFE8F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -661,6 +834,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		054D3E7529CFE0EE00E1CAC0 /* Build configuration list for PBXNativeTarget "TaiwanWeatherWidgetIntent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				054D3E7629CFE0EE00E1CAC0 /* Debug */,
+				054D3E7729CFE0EE00E1CAC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		05C62C6129C6EB59007CFE8F /* Build configuration list for PBXProject "TaiwanWeatherWidget" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
