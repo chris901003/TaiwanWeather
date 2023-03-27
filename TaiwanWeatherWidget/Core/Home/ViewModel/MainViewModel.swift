@@ -33,7 +33,7 @@ class MainViewModel: ObservableObject {
     private var selectedAnyCancellable: AnyCancellable? = nil
     private var weatherInfo: WeatherInfoModel? = nil
     private var maximumWeatherQueryTime: Int = 100
-    private var updateTimeSpace: Int = 10 // (30 * 60)
+    private var updateTimeSpace: Int = 1800 // (30 * 60)
     
     // Init Function
     init() {

@@ -31,7 +31,7 @@ struct Provider: IntentTimelineProvider {
     func getTimeline(for configuration: SelectLocationIntent, in context: Context, completion: @escaping (Timeline<WeatherInfoEntry>) -> Void) {
         Task {
             let manager: ProviderManager = ProviderManager()
-            let nextUpdate = Date().addingTimeInterval(1800)
+            let nextUpdate = Date.getNextHalfHourTime()
             if let selectLocationString = configuration.Location {
                 manager.getUserSelectedLocation(selectedLocation: selectLocationString)
             } else {

@@ -26,4 +26,20 @@ extension Date {
         let hourString = formatter.string(from: self) + "時"
         return hourString
     }
+    
+    /// 獲取下個半小時的時間，如果小於30分就會給30，否則就會給下個小時
+    static func getNextHalfHourTime() -> Date {
+        let currentDate = Date()
+        let currentMin = Calendar.current.component(.minute, from: currentDate)
+        let currentSec = Calendar.current.component(.second, from: currentDate)
+        let toNextHalfHour = 30 * 60 - (currentMin * 60 + currentSec)
+        let toNextHour = 60 * 60 - (currentMin * 60 + currentSec)
+        if toNextHalfHour > 0 {
+            let nextHalfHour = Calendar.current.date(byAdding: .second, value: toNextHalfHour, to: currentDate)!
+            return nextHalfHour
+        } else {
+            let nextHalfHour = Calendar.current.date(byAdding: .second, value: toNextHour, to: currentDate)!
+            return nextHalfHour
+        }
+    }
 }
