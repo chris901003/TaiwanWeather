@@ -11,7 +11,6 @@ import WidgetKit
 class ProviderManager {
     
     // Public Variable
-    var updateCount: Int = 0
     var errorMessage: String = ""
     var selectedCity: String = ""
     var selectedTown: String = ""
@@ -19,6 +18,8 @@ class ProviderManager {
     var rainRate: [(Int, Date)] = []
     var bodyTemperature: [(Int, Date)] = []
     var timeLine: [Date] = []
+    var currentTemperature: Int = 0
+    var currentRainRate: Int = 0
     var isValidSelected: Bool {
         selectedCity != "-" && selectedTown != "-"
     }
@@ -55,22 +56,21 @@ class ProviderManager {
         guard selectedCity != "-" && selectedTown != "-" else { return }
         isError = false
         errorMessage = ""
-        updateCount += 1
         removeAllWeatherInfo()
-        if SharedInfoManager.shared.exclusiveAuthorizationCode == "" {
-            // 若使用公用授權碼將受限於請求次數，優先使用本地資料
-            let loadResult = await loadWeatherInfoFromCoreData()
-            if loadResult {
-//                print("✅ Load weather info from core data.")
-                await MainActor.run {
-                    SharedInfoManager.shared.isProcessing.toggle()
-                }
-                return
-            } else {
-//                print("❌ Reget weather info from web")
-                removeAllWeatherInfo()
-            }
-        }
+//        if SharedInfoManager.shared.exclusiveAuthorizationCode == "" {
+//            // 若使用公用授權碼將受限於請求次數，優先使用本地資料
+//            let loadResult = await loadWeatherInfoFromCoreData()
+//            if loadResult {
+////                print("✅ Load weather info from core data.")
+//                await MainActor.run {
+//                    SharedInfoManager.shared.isProcessing.toggle()
+//                }
+//                return
+//            } else {
+////                print("❌ Reget weather info from web")
+//                removeAllWeatherInfo()
+//            }
+//        }
         let transCityName = CityCodeModel.cityCode[selectedCity]!
         let transElementName = selectedElementNames.map { elementName in
             ElementNameCodeModel.elementNameCode[elementName]!
@@ -97,16 +97,51 @@ class ProviderManager {
             return
         }
         
-        // 將資料保存到本地設備當中
-        await MainActor.run {
-            saveWeatherInfoIntoCoreData()
-        }
-        // 調用從CoreData中獲取天氣資料
-        guard await loadWeatherInfoFromCoreData() else {
+        guard let weatherElementsInfo = weatherInfo.records.locations.first?.location.first?.weatherElement else {
             isError = true
-            errorMessage = "本地讀取資料錯誤"
+            errorMessage = "不可能發生錯誤"
             return
         }
+        
+        for weatherElementInfo in weatherElementsInfo {
+            let elementName = weatherElementInfo.elementName
+            let infos = weatherElementInfo.time
+            switch elementName {
+            case "AT":
+                for info in infos {
+                    let time = Date.formateToDate(from: info.dataTime!)
+                    let temperature = Int(info.elementValue.first!.value)!
+                    bodyTemperature.append((temperature, time))
+                }
+            case "T":
+                var timeDiff = 1000000
+                for info in infos {
+                    let time = Date.formateToDate(from: info.dataTime!)
+                    let temp = Int(info.elementValue.first!.value)!
+                    temperature.append((temp, time))
+                    let dif = abs(Int(time.timeIntervalSince(Date())))
+                    if dif < timeDiff {
+                        timeDiff = dif
+                        currentTemperature = temp
+                    }
+                }
+            case "PoP6h":
+                var timeDiff = 10000000
+                for info in infos {
+                    let startTime = Date.formateToDate(from: info.startTime!)
+                    let probability = Int(info.elementValue.first!.value)!
+                    rainRate.append((probability, startTime))
+                    let dif = abs(Int(startTime.timeIntervalSince(Date())))
+                    if dif < timeDiff {
+                        timeDiff = dif
+                        currentRainRate = probability
+                    }
+                }
+            default:
+                break
+            }
+        }
+        timeLine = bodyTemperature.map{ $0.1 }
         
         await MainActor.run {
             SharedInfoManager.shared.isProcessing.toggle()

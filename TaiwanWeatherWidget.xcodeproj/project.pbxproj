@@ -850,7 +850,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TaiwanWeatherWidget/TaiwanWeatherWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"TaiwanWeatherWidget/Preview Content\"";
 				DEVELOPMENT_TEAM = L4D6WNQFVL;
 				ENABLE_PREVIEWS = YES;
@@ -886,7 +886,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = TaiwanWeatherWidget/TaiwanWeatherWidget.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"TaiwanWeatherWidget/Preview Content\"";
 				DEVELOPMENT_TEAM = L4D6WNQFVL;
 				ENABLE_PREVIEWS = YES;

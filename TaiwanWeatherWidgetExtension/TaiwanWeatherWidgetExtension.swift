@@ -10,18 +10,17 @@ import SwiftUI
 
 struct Provider: IntentTimelineProvider {
     
-    private var manager: ProviderManager = ProviderManager()
-    
     func placeholder(in context: Context) -> WeatherInfoEntry {
         WeatherInfoEntry(date: Date(), info: "我只是固定顯示")
     }
     
     func getSnapshot(for configuration: SelectLocationIntent, in context: Context, completion: @escaping (WeatherInfoEntry) -> Void) {
         Task {
+            let manager: ProviderManager = ProviderManager()
             let currentDate = Date()
             manager.getUserSelectedLocation()
             await manager.fetchWeatherInfo()
-            var weatherInfoEntry = WeatherInfoEntry(date: currentDate, selectedTown: manager.selectedTown, temperature: manager.temperature, rainRate: manager.rainRate, bodyTemperature: manager.bodyTemperature, timeLine: manager.timeLine)
+            var weatherInfoEntry = WeatherInfoEntry(date: currentDate, selectedTown: manager.selectedTown, temperature: manager.temperature, rainRate: manager.rainRate, bodyTemperature: manager.bodyTemperature, timeLine: manager.timeLine, currentTemperature: manager.currentTemperature, currentRainRate: manager.currentRainRate)
             if manager.isError {
                 weatherInfoEntry.info = manager.errorMessage
             }
@@ -31,7 +30,8 @@ struct Provider: IntentTimelineProvider {
     
     func getTimeline(for configuration: SelectLocationIntent, in context: Context, completion: @escaping (Timeline<WeatherInfoEntry>) -> Void) {
         Task {
-            let nextUpdate = Date().addingTimeInterval(3600)
+            let manager: ProviderManager = ProviderManager()
+            let nextUpdate = Date().addingTimeInterval(1800)
             if let selectLocationString = configuration.Location {
                 manager.getUserSelectedLocation(selectedLocation: selectLocationString)
             } else {
@@ -39,11 +39,10 @@ struct Provider: IntentTimelineProvider {
             }
             let currentDate = Date()
             await manager.fetchWeatherInfo()
-            var weatherInfoEntry = WeatherInfoEntry(date: currentDate, selectedTown: manager.selectedTown, temperature: manager.temperature, rainRate: manager.rainRate, bodyTemperature: manager.bodyTemperature, timeLine: manager.timeLine)
+            var weatherInfoEntry = WeatherInfoEntry(date: currentDate, selectedTown: manager.selectedTown, temperature: manager.temperature, rainRate: manager.rainRate, bodyTemperature: manager.bodyTemperature, timeLine: manager.timeLine, currentTemperature: manager.currentTemperature, currentRainRate: manager.currentRainRate)
             if manager.isError {
                 weatherInfoEntry.info = manager.errorMessage
             }
-            weatherInfoEntry.updateCount = manager.updateCount
             let timeline = Timeline(entries: [weatherInfoEntry], policy: .after(nextUpdate))
             completion(timeline)
         }
@@ -57,9 +56,9 @@ struct WeatherInfoEntry: TimelineEntry {
     var rainRate: [(Int, Date)] = []
     var bodyTemperature: [(Int, Date)] = []
     var timeLine: [Date] = []
-    
+    var currentTemperature = 0
+    var currentRainRate = 0
     var info: String = ""
-    var updateCount: Int = 0
 }
 
 struct TaiwanWeatherWidgetExtensionEntryView : View {
@@ -69,9 +68,9 @@ struct TaiwanWeatherWidgetExtensionEntryView : View {
     var body: some View {
         switch family {
         case .systemSmall:
-            SmallWidgetView(selectedTown: entry.selectedTown, temperature: entry.temperature.first?.0 ?? 0, rainRate: entry.rainRate.first?.0 ?? 0, info: entry.info)
+            SmallWidgetView(selectedTown: entry.selectedTown, temperature: entry.currentTemperature, rainRate: entry.currentRainRate, info: entry.info)
         case .systemMedium:
-            MedieumWidgetView(selectedTown: entry.selectedTown, temperature: entry.temperature, rainRate: entry.rainRate, bodyTemperature: entry.bodyTemperature, timeLine: entry.timeLine, info: entry.info, updateCount: entry.updateCount)
+            MedieumWidgetView(selectedTown: entry.selectedTown, temperature: entry.temperature, rainRate: entry.rainRate, bodyTemperature: entry.bodyTemperature, timeLine: entry.timeLine, info: entry.info, currentTemperature: entry.currentTemperature)
         default:
             Text("Error")
         }

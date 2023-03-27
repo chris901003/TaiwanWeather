@@ -13,7 +13,7 @@ class WeatherApiManager {
     static let shared: WeatherApiManager = WeatherApiManager()
     
     // Pirvate Variable
-    private var sharedAuthorizationCode: String = "CWB-2CECC8D4-D1DB-44BB-AF36-E38A4241DB96"
+    private var sharedAuthorizationCode: String = "CWB-78127154-D1E0-476C-9ADC-ADCCC1FCF39A"
     private var authorizationCode: String {
         SharedInfoManager.shared.exclusiveAuthorizationCode == "" ? sharedAuthorizationCode : SharedInfoManager.shared.exclusiveAuthorizationCode
     }

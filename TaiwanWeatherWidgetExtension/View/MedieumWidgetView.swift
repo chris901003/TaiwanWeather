@@ -14,7 +14,7 @@ struct MedieumWidgetView: View {
     var bodyTemperature: [(Int, Date)]
     var timeLine: [Date]
     var info: String
-    var updateCount: Int
+    var currentTemperature: Int
     
     var body: some View {
         ZStack {
@@ -27,11 +27,10 @@ struct MedieumWidgetView: View {
                         Text(selectedTown)
                             .font(Font.custom("ChalkboardSE-Bold", size: 25))
                             .foregroundColor(Color.white)
-                        Text("\(updateCount)")
                         Spacer()
-                        Text("\(temperature.first?.0 ?? 0)° C")
+                        Text("\(currentTemperature)° C")
                             .font(Font.custom("ChalkboardSE-Bold", size: 30))
-                            .foregroundColor(Color.getTemperatureColor(temperature: temperature.first?.0 ?? 0))
+                            .foregroundColor(Color.getTemperatureColor(temperature: currentTemperature))
                     }
                     .padding(.horizontal)
                     HStack {
