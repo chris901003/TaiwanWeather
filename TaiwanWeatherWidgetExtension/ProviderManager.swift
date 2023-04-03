@@ -142,6 +142,10 @@ class ProviderManager {
             }
         }
         timeLine = bodyTemperature.map{ $0.1 }
+        timeLine.sort()
+        bodyTemperature.sort { $0.1 < $1.1 }
+        temperature.sort { $0.1 < $1.1 }
+        rainRate.sort { $0.1 < $1.1 }
         
         await MainActor.run {
             SharedInfoManager.shared.isProcessing.toggle()

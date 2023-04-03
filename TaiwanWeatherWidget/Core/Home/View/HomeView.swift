@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import WidgetKit
 
 struct HomeView: View {
     
@@ -15,6 +16,7 @@ struct HomeView: View {
     @State var isShowAllCitySection: Bool = false
     @State var isShowAllTownSection: Bool = false
     @State var isShowElementNameSection: Bool = false
+    @State var isShowAd: Bool = true
     
     var body: some View {
         ZStack {
@@ -26,8 +28,10 @@ struct HomeView: View {
                 weatherInfoSection
                 
                 Spacer()
-                AdBannderView(unitID: "ca-app-pub-3940256099942544/2934735716")
-                    .frame(height: 50)
+                if isShowAd {
+                    AdBannderView(unitID: "ca-app-pub-9700012113647677/4242746118")
+                        .frame(height: 50)
+                }
             }
             seletCitySection
             selectTownSection
@@ -43,6 +47,9 @@ struct HomeView: View {
             if vm.isShowSuccessSaveAuthorizationCode {
                 checkAnimationMark
             }
+        }
+        .onAppear {
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
     

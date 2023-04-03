@@ -46,8 +46,8 @@ struct MedieumWidgetView: View {
                                     .foregroundColor(Color.white)
                                 Text("\(temperature[idx].0)°")
                                     .foregroundColor(Color.getTemperatureColor(temperature: temperature[idx].0))
-                                Text("\(rainRate[idx].0)%")
-                                    .foregroundColor(Color.getWidgetRainRateColor(rainRate: rainRate[idx].0))
+                                Text("\(getRainRate(targetTime: timeLine[idx]))%")
+                                    .foregroundColor(Color.getWidgetRainRateColor(rainRate: getRainRate(targetTime: timeLine[idx])))
                             }
                         }
                     }
@@ -66,5 +66,30 @@ struct MedieumWidgetView: View {
                 }
             }
         }
+    }
+}
+
+extension MedieumWidgetView {
+    
+    /// 獲取下雨機率，由於下雨機率是6小時為單位所以需要叉分
+    func getRainRate(targetTime: Date) -> Int {
+        let idx = rainRate.firstIndex { $0.1 == targetTime }
+        if idx != nil {
+            return rainRate[idx!].0
+        }
+        guard let futureTime = Calendar.current.date(byAdding: .hour, value: 3, to: targetTime) else {
+            return 0
+        }
+        guard let pastTime = Calendar.current.date(byAdding: .hour, value: -3, to: targetTime) else {
+            return 0
+        }
+        let idx1 = rainRate.firstIndex { $0.1 == futureTime }
+        let idx2 = rainRate.firstIndex { $0.1 == pastTime }
+        guard idx1 != nil || idx2 != nil else { return 0 }
+        var tmp = 0
+        if idx1 != nil { tmp += rainRate[idx1!].0 }
+        if idx2 != nil { tmp += rainRate[idx2!].0 }
+        tmp = tmp / ((idx1 != nil ? 1 : 0) + (idx2 != nil ? 1 : 0))
+        return tmp
     }
 }
